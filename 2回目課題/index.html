@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charaset="UTF-8">
+  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <title>メモ帳</title>
+</head>
+<body>
+  <h1>メモ帳</h1>
+  <textarea id="memo" rows="10" cols="40" name="memo"></textarea>
+  <p><input type="button" id="clear" value="消去"></p>
+  <script>
+    $(function () {
+
+      if (localStorage.getItem('memo')) {
+        $('#memo').val(localStorage.getItem('memo'));
+      }
+
+      $('#clear').click(function () {
+        $('#memo').val('');
+        localStorage.removeItem('memo');
+        // localStorage.clear();
+      });
+
+      $('#memo').bind('keyup', function () {
+        localStorage.setItem('memo', $('#memo').val());
+        console.log(localStorage.getItem('memo'));
+      });
+
+    });
+  </script>
+</body>
+</html>
