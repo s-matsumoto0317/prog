@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>chatapp</title>
+  <link rel="stylesheet" href="./css/chat.css" />
+</head>
+<body>
+  <div class="chat">
+    <div class="chat-view"></div>
+    <div class="chat-post">
+      <input class="chat-post-name" type="text" placeholder="名前を入力してください" />
+      <textarea class="chat-post-content" rows="5" placeholder="内容を入力して下さい"></textarea>
+      <button class="chat-post-btn">送信</button>
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-database.js"></script>
+  <script>
+    //your configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDzDIKXCaCiYkTt-rCcUKbvQ4u2ai4K6p4",
+      authDomain: "gs-dev20-32.firebaseapp.com",
+      databaseURL: "https://gs-dev20-32-default-rtdb.firebaseio.com",
+      projectId: "gs-dev20-32",
+      storageBucket: "gs-dev20-32.appspot.com",
+      messagingSenderId: "589593838799",
+      appId: "1:589593838799:web:7671845e47fd169c02e3ba"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="./js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-size: 14px;
+}
+
+.chat {
+  width: 300px;
+  height: 500px;
+  margin: 20px;
+  position: relative;
+  background-color: #ddd;
+}
+
+.chat .chat-view {
+  width: calc(100% - 20px);
+  height: calc(350px - 20px);
+  padding: 10px;
+  overflow: auto;
+}
+
+.chat .chat-post {
+  width: calc(100% - 20px);
+  height: calc(150px - 20px);
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+.chat .chat-post .chat-post-name {
+  width: calc(60% - 10px);
+  padding: 3px 3px;
+  margin-bottom: 5px;
+}
+
+.chat .chat-post .chat-post-content {
+  width: calc(100% - 10px);
+  height: 60px;
+  resize: none;
+  padding: 3px 5px;
+}
+
+.chat .chat-post .chat-post-btn {
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+/*後から追加するメッセージ用*/
+
+.message {
+  width: 100%;
+  padding: 5px 0;
+  word-wrap: break-word;
+}
