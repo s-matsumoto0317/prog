@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>あなたの地域のお天気</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <link rel="stylesheet" href="./css/weather.css">
+</head>
+<body>
+  <div class="container">
+    <h1>各地のお天気は？</h1>
+    <div>
+      <h2>都市の選択</h2>
+      <input type="radio" id="cityRadio" name="cityRadio" value="1850147">Tokyo
+      <input type="radio" id="cityRadio" name="cityRadio" value="7839805">Melbourne
+      <input type="radio" id="cityRadio" name="cityRadio" value="1261481">New Delhi
+      <input type="radio" id="cityRadio" name="cityRadio" value="292968">Abu Dhabi
+      <input type="radio" id="cityRadio" name="cityRadio" value="524901">Moscow
+      <input type="radio" id="cityRadio" name="cityRadio" value="2643743">London
+      <input type="radio" id="cityRadio" name="cityRadio" value="2172797">Cairns
+      <button id="submit"><i class="fas fa-paper-plane"></i> Click</button>
+    </div>
+    <div class="weatherMain">
+      <h2>現在の天気は</h2>
+      <div><span id="weather" class="bold"></span></div>
+      <div><span id="weatherMark" class="bold"></span></div>
+      <p id="icon"></p>
+    </div>
+    <div>気温　<span id="temp" class="bold"></span>　℃</div>
+    <div>湿度　<span id="humidity" class="bold"></span>　%</div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#submit").click(function (e) {
+        //JSONデータ取得 日本語で天気名を表示したいのでlang=ja　として日本語表記データを取得
+        $.post("http://api.openweathermap.org/data/2.5/weather?id=" + $("input[id='cityRadio']:checked").val() + "&appid=32be16a94dfefa541306cf2c3dd16eb1&lang=ja&units=metric",
+          function (json) {
+            $("#weather").html(json.weather[0].description);
+            $("#humidity").html(json.main.humidity);
+            //lang=jaにすることで華氏から摂氏に変換することなく摂氏表示となる。小数点だけ丸める処理をする
+            $("#temp").html(Math.round(json.main.temp));
+
+            //天気に応じた天気アイコンを表示させる
+            switch (json.weather[0].main) {
+              case 'Clouds':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/04d.png' >");
+                break;
+              case 'Snow':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/13d.png' >");
+                break;
+              case 'Rain':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/09d.png' >");
+                break;
+              case 'Clear':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/01d.png' >");
+                break;
+              case 'Fog':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+                break;
+              case 'Mist':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/50n.png' >");
+                break;
+              case 'Haze':
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/50d.png' >");
+                break;
+              default:
+                $("#weatherMark").html("<img src='http://openweathermap.org/img/w/01n.png' >");
+            }
+          }
+        );
+      });
+    });
+
+  </script>
+</body>
